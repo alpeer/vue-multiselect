@@ -1,6 +1,6 @@
 {
-  "name": "vue-multiselect",
-  "version": "2.1.0",
+  "name": "vue-multiselect-deriv",
+  "version": "1.0.0",
   "private": false,
   "types": "index.d.ts",
   "scripts": {
@@ -87,12 +87,12 @@
     "webpack-merge": "^2.6.1"
   },
   "license": "MIT",
-  "homepage": "https://shentao.github.io/vue-multiselect/",
-  "main": "dist/vue-multiselect.min.js",
-  "author": "Damian Dulisz <damian.dulisz@gmail.com>",
+  "homepage": "https://github.com/alpeer/vue-multiselect-deriv/",
+  "main": "src/index.js",
+  "author": "Alper Kürşat <alperkrst@gmail.com>",
   "jsnext:main": "dist/vue-multiselect.min.js",
   "bugs": {
-    "url": "https://github.com/shentao/vue-multiselect/issues"
+    "url": "https://github.com/alpeer/vue-multiselect-deriv/issues"
   },
   "jspm": {
     "main": "dist/vue-multiselect.min.js",
@@ -101,9 +101,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/shentao/vue-multiselect.git"
+    "url": "git+https://github.com/alpeer/vue-multiselect-deriv.git"
   },
-  "description": "Multiselect component for vue.js",
+  "description": "Multiselect-deriv component for vue.js",
   "unpkg": "dist/vue-multiselect.min.js",
   "engines": {
     "node": ">= 4.0.0",

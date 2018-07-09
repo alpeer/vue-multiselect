@@ -116,9 +116,18 @@
                 </span>
               </li>
             </template>
-            <li v-show="showNoResults && (filteredOptions.length === 0 && search && !loading)">
+            <li v-show="notFound!='' &&!adder&showNoResults && (filteredOptions.length === 0 && search && !loading)">
               <span class="multiselect__option">
-                <slot name="noResult">No elements found. Consider changing the search query.</slot>
+                {{ notFound }}
+              </span>
+            </li>
+            <li v-show="adder&&(search && !loading) && !onList">
+              <span @mousedown.prevent="addNew(search,name)" class="multiselect__option new__option" :class="optionHighlight(filteredOptions.length, adder, true)"
+                  @click.stop="select(adder)"
+                  @mouseenter.self="pointerSet(filteredOptions.length)">
+                <slot name="option" :option="adder" :search="search">
+                  <span>{{ getAdder }}</span>
+                </slot>
               </span>
             </li>
             <li v-show="showNoOptions && (options.length === 0 && !search && !loading)">
@@ -136,7 +145,7 @@
 <script>
   import multiselectMixin from './multiselectMixin'
   import pointerMixin from './pointerMixin'
-
+ 
   export default {
     name: 'vue-multiselect',
     mixins: [multiselectMixin, pointerMixin],
@@ -148,6 +157,18 @@
        * @type {String}
        */
       name: {
+        type: String,
+        default: ''
+      },
+      adder: {
+        type: String,
+        default: '0₺ Ekle'
+      },
+      onAdd: {
+        type: Function,
+        default:  console.log
+      },
+      notFound: {
         type: String,
         default: ''
       },
@@ -343,9 +364,22 @@
       },
       showSearchInput () {
         return this.searchable && (this.hasSingleSelectedSlot && (this.visibleSingleValue || this.visibleSingleValue === 0) ? this.isOpen : true)
+      },
+      getAdder (e) {
+        return this.adder.replace(new RegExp("(0[₺|\$|₸|₼])+"),this.search);
+      },
+      onList (e) {
+        return this.filteredOptions.some(function(e){return e.name.toLowerCase()==this},this.search.toLowerCase());
+      }
+    },
+    methods:{
+      addNew:function (item,name) {
+        //this.options.push(item)
+        this.onAdd(this,item,name);
       }
     }
   }
+  
 </script>
 
 <style>
@@ -667,7 +701,10 @@ fieldset[disabled] .multiselect {
   cursor: pointer;
   white-space: nowrap;
 }
-
+.multiselect__option.new__option {
+  background:#09F;
+  color:#FFF;
+}
 .multiselect__option:after {
   top: 0;
   right: 0;
