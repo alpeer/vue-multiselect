@@ -1,6 +1,6 @@
 {
   "name": "vue-multiselect-deriv",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "private": false,
   "types": "index.d.ts",
   "scripts": {
@@ -88,7 +88,7 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/alpeer/vue-multiselect-deriv/",
-  "main": "dist/vue-multiselect.min.js",
+  "main": "src/index.js",
   "author": "Alper Kürşat <alperkrst@gmail.com>",
   "jsnext:main": "dist/vue-multiselect.min.js",
   "bugs": {

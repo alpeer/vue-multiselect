@@ -122,10 +122,9 @@
               </span>
             </li>
             <li v-show="adder&&(search && !loading) && !onList">
-              <span @mousedown.prevent="addNew(search,name)" class="multiselect__option new__option" :class="optionHighlight(filteredOptions.length, adder, true)"
-                  @click.stop="select(adder)"
+              <span @mousedown.prevent="addNew(search,name)" class="multiselect__option new__option" :class="optionHighlight(filteredOptions.length, search)"
                   @mouseenter.self="pointerSet(filteredOptions.length)">
-                <slot name="option" :option="adder" :search="search">
+                <slot name="option" :option="search" :search="search">
                   <span>{{ getAdder }}</span>
                 </slot>
               </span>
@@ -369,7 +368,7 @@
         return this.adder.replace(/(0[₺|$|₸|₼])+/, this.search)
       },
       onList (e) {
-        return this.filteredOptions.some(function (e) {
+        return (this.value ? this.value : []).concat(this.filteredOptions).some(function (e) {
           return e.name.toLowerCase() === this
         }, this.search.toLowerCase())
       }
@@ -702,10 +701,7 @@ fieldset[disabled] .multiselect {
   cursor: pointer;
   white-space: nowrap;
 }
-.multiselect__option.new__option {
-  background:#09F;
-  color:#FFF;
-}
+
 .multiselect__option:after {
   top: 0;
   right: 0;
@@ -849,5 +845,13 @@ fieldset[disabled] .multiselect {
 @keyframes spinning {
   from { transform:rotate(0) }
   to { transform:rotate(2turn) }
+}
+.multiselect__option.new__option {
+  background:#09F;
+  color:#FFF;
+}
+.multiselect__option .new__option {
+  background:#09F;
+  color:#FFF;
 }
 </style>
