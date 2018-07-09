@@ -145,7 +145,7 @@
 <script>
   import multiselectMixin from './multiselectMixin'
   import pointerMixin from './pointerMixin'
- 
+
   export default {
     name: 'vue-multiselect',
     mixins: [multiselectMixin, pointerMixin],
@@ -166,7 +166,7 @@
       },
       onAdd: {
         type: Function,
-        default:  console.log
+        default: console.log
       },
       notFound: {
         type: String,
@@ -366,16 +366,17 @@
         return this.searchable && (this.hasSingleSelectedSlot && (this.visibleSingleValue || this.visibleSingleValue === 0) ? this.isOpen : true)
       },
       getAdder (e) {
-        return this.adder.replace(new RegExp("(0[₺|\$|₸|₼])+"),this.search);
+        return this.adder.replace(/(0[₺|$|₸|₼])+/, this.search)
       },
       onList (e) {
-        return this.filteredOptions.some(function(e){return e.name.toLowerCase()==this},this.search.toLowerCase());
+        return this.filteredOptions.some(function (e) {
+          return e.name.toLowerCase() === this
+        }, this.search.toLowerCase())
       }
     },
-    methods:{
-      addNew:function (item,name) {
-        //this.options.push(item)
-        this.onAdd(this,item,name);
+    methods: {
+      addNew: function (item, name) {
+        this.onAdd(this, item, name)
       }
     }
   }

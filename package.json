@@ -88,7 +88,7 @@
   },
   "license": "MIT",
   "homepage": "https://github.com/alpeer/vue-multiselect-deriv/",
-  "main": "src/index.js",
+  "main": "dist/vue-multiselect.min.js",
   "author": "Alper Kürşat <alperkrst@gmail.com>",
   "jsnext:main": "dist/vue-multiselect.min.js",
   "bugs": {
