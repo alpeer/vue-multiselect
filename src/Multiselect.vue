@@ -846,12 +846,4 @@ fieldset[disabled] .multiselect {
   from { transform:rotate(0) }
   to { transform:rotate(2turn) }
 }
-.multiselect__option.new__option {
-  background:#09F;
-  color:#FFF;
-}
-.multiselect__option .new__option {
-  background:#09F;
-  color:#FFF;
-}
 </style>
