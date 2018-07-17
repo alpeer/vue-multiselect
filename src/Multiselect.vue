@@ -121,7 +121,7 @@
                 {{ notFound }}
               </span>
             </li>
-            <li v-show="adder&&(search && !loading) && !onList">
+            <li v-show="adder!=''&&(search && !loading) && !onList">
               <span @mousedown.prevent="addNew(search,name)" class="multiselect__option new__option" :class="optionHighlight(filteredOptions.length, search)"
                   @mouseenter.self="pointerSet(filteredOptions.length)">
                 <slot name="option" :option="search" :search="search">
@@ -161,11 +161,10 @@
       },
       adder: {
         type: String,
-        default: '0₺ Ekle'
+        default: ''
       },
       onAdd: {
-        type: Function,
-        default: console.log
+        type: Function
       },
       notFound: {
         type: String,
@@ -173,48 +172,48 @@
       },
       /**
        * String to show when pointing to an option
-       * @default 'Press enter to select'
+       * @default ''
        * @type {String}
        */
       selectLabel: {
         type: String,
-        default: 'Press enter to select'
+        default: ''
       },
       /**
        * String to show when pointing to an option
-       * @default 'Press enter to select'
+       * @default ''
        * @type {String}
        */
       selectGroupLabel: {
         type: String,
-        default: 'Press enter to select group'
+        default: ''
       },
       /**
        * String to show next to selected option
-       * @default 'Selected'
+       * @default ''
        * @type {String}
       */
       selectedLabel: {
         type: String,
-        default: 'Selected'
+        default: ''
       },
       /**
        * String to show when pointing to an already selected option
-       * @default 'Press enter to remove'
+       * @default ''
        * @type {String}
       */
       deselectLabel: {
         type: String,
-        default: 'Press enter to remove'
+        default: ''
       },
       /**
        * String to show when pointing to an already selected option
-       * @default 'Press enter to remove'
+       * @default ''
        * @type {String}
       */
       deselectGroupLabel: {
         type: String,
-        default: 'Press enter to deselect group'
+        default: ''
       },
       /**
        * Decide whether to show pointer labels
@@ -368,13 +367,18 @@
         return this.adder.replace(/(0[₺|$|₸|₼])+/, this.search)
       },
       onList (e) {
-        return (this.value ? this.value : []).concat(this.filteredOptions).some(function (e) {
+        return (this.value ? (this.value instanceof Array ? this.value : [this.value]) : []).concat(this.filteredOptions).some(function (e) {
           return e.name.toLowerCase() === this
         }, this.search.toLowerCase())
       }
     },
     methods: {
       addNew: function (item, name) {
+        this.search = ''
+        this.isOpen = false
+        if (this.hasSingleSelectedSlot) {
+          this.select(-1)
+        }
         this.onAdd(this, item, name)
       }
     }
